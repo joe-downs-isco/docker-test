@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  packages: write
+
 env:
   USER: ${{ github.repository_owner }}
   PASSWORD: ${{ secrets.GITHUB_TOKEN }}
