@@ -7,9 +7,9 @@ on:
     branches: [ "main" ]
 
 env:
-  REGISTRY_USER: ${{ github.repository_owner }}
-  REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-  REGISTRY_SERVER: ghcr.io
+  USER: ${{ github.repository_owner }}
+  PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+  SERVER: ghcr.io
   IMAGE_NAME: pipeline
   IMAGE_TAG: dev
 
@@ -23,12 +23,12 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build the image
-      run: docker build . --tag ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      run: docker build . --tag ${{ env.SERVER }}/${{ env.USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
     - name: Login to registry
       run: >
         echo ${{ secrets.GITHUB_TOKEN }} |
-        docker login -u ${{ env.REGISTRY_USER }} --password-stdin ${{ env.REGISTRY_SERVER }}
+        docker login -u ${{ env.USER }} --password-stdin ${{ env.SERVER }}
 
     - name: Push to registry
-      run: docker push ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+      run: docker push ${{ env.SERVER }}/${{ env.USER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
