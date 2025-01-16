@@ -7,4 +7,4 @@ RUN <<EOF
     echo "xdebug.start_with_request=yes" >> xdebug.ini
     echo "xdebug.mode=debug" >> xdebug.ini
 EOF
-CMD ["loop.sh"]
+CMD ["/loop.sh"]
