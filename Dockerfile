@@ -5,4 +5,4 @@ RUN <<EOF
     apt-get update
     apt-get install -y apache2 php
 EOF
-CMD /loop.sh
+CMD ["loop.sh"]
